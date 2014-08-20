@@ -10,7 +10,10 @@ angular.module('starter.controllers', [])
 })
 
 .controller('FriendsCtrl', function($scope, Friends) {
-  $scope.friends = Friends.all();
+    var promise = Friends.all();
+    promise.then(function(data) {
+        $scope.friends = data;
+    });
 })
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {

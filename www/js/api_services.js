@@ -7,29 +7,28 @@ angular.module('starter.services', [])
         // Might use a resource here that returns a JSON array
         console.log("apiServices loaded");
         var apiServerUrl = "http://whereyouat2.azurewebsites.net/users";//"http://127.0.0.1:3000/";
-        var friends;
+        var friends = [];
 
-        // Might use a resource here that returns a JSON array
-        $http.get(apiServerUrl).success(function(data) {
-            console.log("Got some data");
-            friends = data;
-        });
-
-        return {
-            all: function() {
-                return friends;
-            },
-            get: function(friendId) {
-                // Simple index lookup
-                return friends[friendId];
-            },
-            getByMeetupId: function(meetupId) {
-                for(i=0; i<friends.length; i++) {
-                    if(friends[i].meetupId == meetupId)
-                        return friends[i];
-                }
-
-                return null;
-            }
+        var Friends = function(data) {
+            angular.extend(this, data);
         }
+
+        Friends.all = function() {
+            return $http.get(apiServerUrl).then(function(response) {
+                console.log("Got some data");
+                friends = response.data;
+                return new Friends(response.data);
+            });
+        }
+
+        Friends.getByMeetupId = function(meetupId) {
+            for(i=0; i<friends.length; i++) {
+                if(friends[i].meetupId == meetupId)
+                    return friends[i];
+            }
+
+            return null;
+        }
+
+        return Friends;
     });
