@@ -6,7 +6,7 @@ angular.module('starter.services', [])
     .factory('Friends', function($http) {
         // Might use a resource here that returns a JSON array
         console.log("apiServices loaded");
-        var apiServerUrl = "http://localhost:3000/";
+        var apiServerUrl = "http://whereyouat2.azurewebsites.net/users";//"http://127.0.0.1:3000/";
         var friends;
 
         // Might use a resource here that returns a JSON array
@@ -22,6 +22,14 @@ angular.module('starter.services', [])
             get: function(friendId) {
                 // Simple index lookup
                 return friends[friendId];
+            },
+            getByMeetupId: function(meetupId) {
+                for(i=0; i<friends.length; i++) {
+                    if(friends[i].meetupId == meetupId)
+                        return friends[i];
+                }
+
+                return null;
             }
         }
     });
