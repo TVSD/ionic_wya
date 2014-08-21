@@ -1,0 +1,15 @@
+<ion-view title="Members">
+    <ion-content class="has-header">
+        <ion-list>
+            <a ng-repeat="member in members"
+               href="#/tab/member/{{member.id}}"
+               class="item item-avatar-left">
+
+                <img ng-if="!!member.photo" src="{{member.photo.thumb_link}}">
+                <img ng-if="!member.photo" src="img/placeholder.jpg">
+                <h2>{{member.name}}</h2>
+                <p>{{member.city}}, {{member.state}}</p>
+            </a>
+        </ion-list>
+    </ion-content>
+</ion-view>

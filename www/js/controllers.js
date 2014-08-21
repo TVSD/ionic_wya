@@ -6,24 +6,38 @@ angular.module('starter.controllers', [])
     };
 })
 
-.controller('DashCtrl', function($scope) {
+.controller('MembersCtrl', function($rootScope, Members) {
+    // Check whether friends have already been loaded.
+    // If so, do not reload.
+    if (typeof $rootScope.members != 'undefined')
+        return;
+
+    console.log("Loading members");
+    var promise = Members.all();
+    promise.then(function(data) {
+        $rootScope.members = data;
+    });
 })
 
-.controller('FriendsCtrl', function($scope,  Friends) {
-    //$http.get('http://whereyouat2.azurewebsites.net/users')
-    //    .then(function (response)
-    //    {
-    //        $scope.friends = response.data;
-    //        console.log(response.data);
-    //    })
+.controller('FriendsCtrl', function($rootScope,  Friends) {
+    // Check whether friends have already been loaded.
+    // If so, do not reload.
+    if (typeof $rootScope.friends != 'undefined')
+        return;
+
+    console.log("Loading friends");
     var promise = Friends.all();
     promise.then(function(data) {
-        $scope.friends = data;
+        $rootScope.friends = data;
     });
 })
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
     $scope.friend = Friends.getByMeetupId($stateParams.friendId);
+})
+
+.controller('MemberDetailCtrl', function($scope, $stateParams, Members) {
+    $scope.member = Members.getByMeetupId($stateParams.memberId);
 })
 
 .controller('AccountCtrl', function($scope) {
