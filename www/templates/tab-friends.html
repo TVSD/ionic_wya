@@ -2,11 +2,12 @@
     <ion-content class="has-header">
         <ion-list>
             <a ng-repeat="friend in friends"
-               href="#/tab/friend/{{friend.meetupId}}"
+               href="#/tab/friend/{{friend.id}}"
                class="item item-avatar-left">
 
-                <img src="img/placeholder.jpg">
-                <h2>{{friend.contactName}}</h2>
+                <img ng-if="!!friend.photo" src="{{friend.photo.thumb_link}}">
+                <img ng-if="!friend.photo" src="img/placeholder.jpg">
+                <h2>{{friend.name}}</h2>
             </a>
         </ion-list>
     </ion-content>

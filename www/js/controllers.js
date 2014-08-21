@@ -9,7 +9,13 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope) {
 })
 
-.controller('FriendsCtrl', function($scope, Friends) {
+.controller('FriendsCtrl', function($scope,  Friends) {
+    //$http.get('http://whereyouat2.azurewebsites.net/users')
+    //    .then(function (response)
+    //    {
+    //        $scope.friends = response.data;
+    //        console.log(response.data);
+    //    })
     var promise = Friends.all();
     promise.then(function(data) {
         $scope.friends = data;
@@ -17,7 +23,7 @@ angular.module('starter.controllers', [])
 })
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
-  $scope.friend = Friends.getByMeetupId($stateParams.friendId);
+    $scope.friend = Friends.getByMeetupId($stateParams.friendId);
 })
 
 .controller('AccountCtrl', function($scope) {

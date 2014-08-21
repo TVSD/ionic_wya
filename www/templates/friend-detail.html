@@ -7,18 +7,19 @@
 <ion-view title="Friend details">
   <ion-content has-header="true" padding="true">
       <br><br>
-      <h1>{{friend.contactName}}</h1>
+      <h1>{{friend.name}}</h1>
       <br>
+      <img src="{{friend.photo.photo_link}}" />
       <div class="list">
 
           <a class="item item-icon-left" href="#">
               <i class="icon ion-email"></i>
-              {{friend.emailAddress}}
+              <p>email@email.com</p>
           </a>
 
           <a class="item item-icon-left" href="#">
               <i class="icon ion-android-call"></i>
-              {{friend.phoneNumber}}
+              <p>951-676-9567</p>
           </a>
 
       </div>
