@@ -3,11 +3,15 @@
         <ion-list>
             <a ng-repeat="member in members"
                href="#/tab/member/{{member.id}}"
-               class="item item-avatar-left">
+               class="item item-avatar-left item-icon-right">
 
                 <img ng-if="!!member.photo" src="{{member.photo.thumb_link}}">
                 <img ng-if="!member.photo" src="img/placeholder.jpg">
                 <h2>{{member.name}}</h2>
+
+                <!-- Show the "note" icon on the right only when note was saved -->
+                <i class="icon ion-ios7-paper-outline" ng-if="$storage[member.id]"></i>
+
                 <p>{{member.city}}, {{member.state}}</p>
             </a>
         </ion-list>

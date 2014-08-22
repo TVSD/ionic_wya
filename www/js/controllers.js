@@ -6,7 +6,10 @@ angular.module('starter.controllers', ['ngStorage'])
     };
 })
 
-.controller('MembersCtrl', function($rootScope, Members) {
+.controller('MembersCtrl', function($rootScope, $scope, $localStorage, Members) {
+    // Make the local storage available to the view
+    $scope.$storage = $localStorage;
+
     // Check whether friends have already been loaded.
     // If so, do not reload.
     if (typeof $rootScope.members != 'undefined')
@@ -19,7 +22,10 @@ angular.module('starter.controllers', ['ngStorage'])
     });
 })
 
-.controller('FriendsCtrl', function($rootScope, Friends) {
+.controller('FriendsCtrl', function($rootScope, $scope, $localStorage, Friends) {
+    // Make the local storage available to the view
+    $scope.$storage = $localStorage;
+
     // Check whether friends have already been loaded.
     // If so, do not reload.
     if (typeof $rootScope.friends != 'undefined')
