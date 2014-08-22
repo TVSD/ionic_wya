@@ -6,7 +6,7 @@ angular.module('starter.controllers', ['ngStorage'])
     };
 })
 
-.controller('MembersCtrl', function($rootScope, $scope, $localStorage, Members) {
+.controller('MembersCtrl', function($rootScope, $scope, $localStorage, $ionicLoading, Members) {
     // Make the local storage available to the view
     $scope.$storage = $localStorage;
 
@@ -16,13 +16,22 @@ angular.module('starter.controllers', ['ngStorage'])
         return;
 
     console.log("Loading members");
+
+    // Show a busy indicator
+    var busy = $ionicLoading.show({
+        template: '<i class="icon ion-loading-c" style="font-size:30pt"></i>'
+    });
+
     var promise = Members.all();
     promise.then(function(data) {
+        // Inject members data into the root scope
         $rootScope.members = data;
+        // Hide the busy indicator
+        busy.hide();
     });
 })
 
-.controller('FriendsCtrl', function($rootScope, $scope, $localStorage, Friends) {
+.controller('FriendsCtrl', function($rootScope, $scope, $localStorage, $ionicLoading, Friends) {
     // Make the local storage available to the view
     $scope.$storage = $localStorage;
 
@@ -32,9 +41,18 @@ angular.module('starter.controllers', ['ngStorage'])
         return;
 
     console.log("Loading friends");
+
+    // Show a busy indicator
+    var busy = $ionicLoading.show({
+        template: '<i class="icon ion-loading-c" style="font-size:30pt"></i>'
+    });
+
     var promise = Friends.all();
     promise.then(function(data) {
+        // Inject friends data into the root scope
         $rootScope.friends = data;
+        // Hide the busy indicator
+        busy.hide();
     });
 })
 
