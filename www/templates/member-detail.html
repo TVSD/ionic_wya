@@ -6,10 +6,24 @@
 -->
 <ion-view title="Member details">
   <ion-content has-header="true" padding="true">
-      <br>
       <img src="{{member.photo.photo_link}}" />
       <br>
       <h1>{{member.name}}</h1>
       <h4>{{member.city}}, {{member.state}}</h4>
+
+      <div class="list" ng-if="note">
+          <!-- Showing a note item only if a note has been saved.
+             Clicking on the note item will transfer to note editing page -->
+          <a class="item item-text-wrap item-icon-left" href="#/tab/add_member_note/{{member.id}}">
+              <i class="icon ion-ios7-paper-outline"></i>
+              <h3>{{note}}</h3>
+          </a>
+
+      </div>
+
+      <!-- Showing the "Add note" button only when there is no note saved yet. -->
+      <a class="button button-block button-large button-positive" ng-if="!note" href="#/tab/add_member_note/{{member.id}}">
+          Add note
+      </a>
   </ion-content>
 </ion-view>

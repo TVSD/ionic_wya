@@ -65,7 +65,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
-    .state('tab.friends', {
+    .state('tab.member-note', {
+        url: '/add_member_note/:memberId',
+            views: {
+                'tab-members': {
+                  templateUrl: 'templates/add-note.html',
+                  controller: 'NoteCtrl'
+                }
+            }
+    })
+
+      .state('tab.friends', {
       url: '/friends',
       views: {
         'tab-friends': {
@@ -83,6 +93,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+
+      .state('tab.friend-note', {
+          url: '/add_friend_note/:memberId',
+          views: {
+              'tab-friends': {
+                  templateUrl: 'templates/add-note.html',
+                  controller: 'NoteCtrl'
+              }
+          }
+      })
 
     .state('tab.account', {
       url: '/account',
