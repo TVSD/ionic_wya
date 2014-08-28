@@ -1,88 +1,54 @@
-Ionic App Base
+Ionic-based WhereYouAt app
 =====================
 
-A starting project for Ionic that optionally supports
-using custom SCSS.
-
-## Using this project
-
-We recommend using the `ionic` utility to create new Ionic projects that are based on this project but use a ready-made starter template.
-
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
-
-```bash
-$ sudo npm install -g ionic
-```
-
-Then run:
-
-```bash
-$ sudo npm install -g ionic
-$ ionic start myProject tabs
-```
-
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page.
+WhereYouAt app is meant to let you keep track of people you meet via Meetup. It was created using Ionic framework and Angular.js. Data is fed to the app by a backend running the TVSD/where_you_at_server Node.js/MongoDB code. In its current incarnation the app only works with the TVSD Meetup group.
 
 ## Installation
 
-While we recommend using the `ionic` utility to create new Ionic projects, you can use this repo as a barebones starting point to your next Ionic app.
+We assume that you already have `Node.js` and `npm` installed on your system. (Which you should, because they are awesome!)
 
-To use this project as is, first clone the repo from GitHub, then run:
+You will need to install `ionic` and `cordova` like so:
 
 ```bash
-$ cd ionic-app-base
-$ sudo npm install -g cordova ionic gulp
-$ npm install
-$ gulp install
+$ npm install -g cordova ionic
 ```
 
-## Using Sass (optional)
+Now the reason why the following is kind of awkward is because `ionic` project contains a lot of files that we didn't want to keep track of in this ionic_wya repo. So those files we will have to grab from an `ionic` starter project.
 
-This project makes it easy to use Sass (the SCSS syntax) in your projects. This enables you to override styles from Ionic, and benefit from
-Sass's great features.
+Change to your working directory and do:
 
-Just update the `./scss/ionic.app.scss` file, and run `gulp` or `gulp watch` to rebuild the CSS files for Ionic.
-
-Note: if you choose to use the Sass method, make sure to remove the included `ionic.css` file in `index.html`, and then uncomment
-the include to your `ionic.app.css` file which now contains all your Sass code and Ionic itself:
-
-```html
-<!-- IF using Sass (run gulp sass first), then remove the CSS include above
-<link href="css/ionic.app.css" rel="stylesheet">
--->
+```bash
+$ ionic start ionic_temp
+$ git clone https://github.com/TVSD/ionic_wya.git
 ```
 
-## Updating Ionic
+These operations will create two new directories for you: `ionic_temp` and `ionic_wya`. Now from the `ionic_temp` copy ONLY the directories `hooks`, `platforms`, and `plugins` to `ionic_wya`.
 
-To update to a new version of Ionic, open bower.json and change the version listed there.
+And that's it! You should now be able to use `ionic_wya` directory to run the project as described below. Git will keep track of all the "important" changes, i.e. mostly those in `www` directory.
 
-For example, to update from version `1.0.0-beta.4` to `1.0.0-beta.5`, open bower.json and change this:
 
-```
-"ionic": "driftyco/ionic-bower#1.0.0-beta.4"
-```
+## Running the app in a browser
 
-To this:
+Go to `ionic_wya` directory and type in
 
-```
-"ionic": "driftyco/ionic-bower#1.0.0-beta.5"
+```bash
+$ ionic serve
 ```
 
-After saving the update to bower.json file, run `gulp install`.
+This will start a local web server and open a tab in your browser where your app will be running (being served from said web server).
 
-Alternatively, install bower globally with `npm install -g bower` and run `bower install`.
+Just make sure that you are running in a "normal" browser. I.e. avoid Internet Explorer. If `ionic serve` opened the app in Internet Explorer, you can simply copy the URL from the navigation bar to a different browser, to run it there.
 
-#### Using the Nightly Builds of Ionic
 
-If you feel daring and want use the bleeding edge 'Nightly' version of Ionic, change the version of Ionic in your bower.json to this:
+## Running the app on a device/simulator
 
+Ionic wraps some of the Cordova functionality, so for example to run the app on an Android device you can do:
+
+```bash
+$ ionic platform android
+$ ionic run android
 ```
-"ionic": "driftyco/ionic-bower#master"
-```
 
-Warning: the nightly version is not stable.
+Note that `ionic platform android` command only needs to be given once to create the Android project structure in `platforms` directory.
 
-
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/contribute/#issues) to the main Ionic repository. On the other hand, pull requests are welcome here!
-
+Of course you will only be able to run the app on a device if you have the Android development environment fully installed and configured. That can be tough and you should look for info about that elsewhere, for example here: http://cordova.apache.org/docs/en/2.5.0/guide_getting-started_android_index.md.html
