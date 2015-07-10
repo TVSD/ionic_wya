@@ -1,6 +1,8 @@
 Ionic-based WhereYouAt app
 =====================
 
+[![Join the chat at https://gitter.im/TVSD/ionic_wya](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/TVSD/ionic_wya?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 WhereYouAt app is meant to let you keep track of people you meet via Meetup. It was created using Ionic framework and Angular.js. Data is fed to the app by a backend running the TVSD/where_you_at_server Node.js/MongoDB code. In its current incarnation the app only works with the TVSD Meetup group.
 
 ## Installation
