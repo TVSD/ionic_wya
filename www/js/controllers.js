@@ -31,7 +31,7 @@ angular.module('starter.controllers', ['ngStorage'])
     });
 })
 
-.controller('FriendsCtrl', function($rootScope, $scope, $localStorage, $ionicLoading, Friends) {
+.controller('FriendsCtrl', function($rootScope, $scope, $localStorage, $ionicLoading, Friends, $ionicViewService, $ionicPopup) {
     // Make the local storage available to the view
     $scope.$storage = $localStorage;
 
@@ -47,13 +47,24 @@ angular.module('starter.controllers', ['ngStorage'])
         template: '<i class="icon ion-loading-c" style="font-size:30pt"></i>'
     });
 
-    var promise = Friends.all();
-    promise.then(function(data) {
-        // Inject friends data into the root scope
-        $rootScope.friends = data;
-        // Hide the busy indicator
-        busy.hide();
-    });
+    var promise = Friends.all()
+        .then(function(data) {
+            // Inject friends data into the root scope
+            $rootScope.friends = data.data;
+            // Hide the busy indicator
+            busy.hide();
+        })
+        .catch(function(data){ 
+            // Catch an error and go to the last view
+            $ionicViewService.getBackView().go();
+            // Hide the busy indicator
+            busy.hide();
+            // Display an error popup
+            $ionicPopup.alert({
+                title: 'Error',
+                template: 'An error occurred while trying to retrieve the friends list.'
+            });
+        });
 })
 
 .controller('FriendDetailCtrl', function($scope, $stateParams, $localStorage, Friends) {

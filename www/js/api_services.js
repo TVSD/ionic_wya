@@ -14,11 +14,16 @@ angular.module('starter.services', [])
         }
 
         Friends.all = function() {
-            return $http.get(apiServerUrl).then(function(response) {
-                console.log("Got some data");
-                friends = response.data;
-                return new Friends(response.data);
-            });
+            return $http.get(apiServerUrl)
+                .success(function(data) {
+                    console.log("Success: Got some data");
+                    friends = data;
+                    return new Friends(data);
+                })
+                .error(function(data) {
+                    console.log("Error: " + data);
+                    throw new Error("Server returned an error");
+                });
         }
 
         Friends.getByMeetupId = function(meetupId) {
